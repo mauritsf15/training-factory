@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -13,7 +15,35 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="h-screen flex flex-col">
+        <header>
+            <nav class="p-5 shadow-md bg-light-700 flex justify-between items-center relative">
+                <div class="logo z-10 select-none">
+                    <h3 class="text-3xl font-bold">Training Factory Den Haag</h3>
+                </div>
+                <div class="links flex justify-center gap-2 absolute left-0 right-0 z-20">
+                    <a href="#" class="flex items-center px-1" style="
+                        border-bottom:2px solid black;">
+                        <i class="fas text-md mr-2 fa-home"></i>
+                        <span class="text-md">Home</span>
+                    </a>
+                    <a href="#" class="flex items-center px-1" style="
+                    border-bottom:2px solid transparent;">
+                        <i class="fas text-md mr-2 fa-info"></i>
+                        <span class="text-md">Contact</span>
+                    </a>
+                    <a href="#" class="flex items-center px-1" style="
+                    border-bottom:2px solid transparent;">
+                        <i class="fas text-md mr-2 fa-dumbbell"></i>
+                        <span class="text-md">Trainingsvormen</span>
+                    </a>
+                </div>
+                <div class="register z-50 flex items-center text-md">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-full mr-3" alt="profile" width="32" height="32">
+                    <a href="#"> Inloggen </a> <span class="mx-2">/</span> <a href="#">Registreren</a>
+                </div>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>

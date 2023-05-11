@@ -29,9 +29,9 @@ class Classes
     private ?Trainings $training_id = null;
 
     #[ORM\ManyToOne(inversedBy: 'classes')]
-    private ?Users $instructor_id = null;
+    private ?User $instructor_id = null;
 
-    #[ORM\ManyToMany(targetEntity: Users::class, inversedBy: 'classes')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'classes')]
     private Collection $enrollments;
 
     public function __construct()
@@ -92,12 +92,12 @@ class Classes
         return $this;
     }
 
-    public function getInstructorId(): ?Users
+    public function getInstructorId(): ?User
     {
         return $this->instructor_id;
     }
 
-    public function setInstructorId(?Users $instructor_id): self
+    public function setInstructorId(?User $instructor_id): self
     {
         $this->instructor_id = $instructor_id;
 
@@ -105,14 +105,14 @@ class Classes
     }
 
     /**
-     * @return Collection<int, Users>
+     * @return Collection<int, User>
      */
     public function getEnrollments(): Collection
     {
         return $this->enrollments;
     }
 
-    public function addEnrollment(Users $enrollment): self
+    public function addEnrollment(User $enrollment): self
     {
         if (!$this->enrollments->contains($enrollment)) {
             $this->enrollments->add($enrollment);
@@ -121,7 +121,7 @@ class Classes
         return $this;
     }
 
-    public function removeEnrollment(Users $enrollment): self
+    public function removeEnrollment(User $enrollment): self
     {
         $this->enrollments->removeElement($enrollment);
 

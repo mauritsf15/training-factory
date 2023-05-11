@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trainings lessen{% endblock %}
+
+{% block body %}
+<div class="container mx-auto h-100 flex-1 py-5 px-0 md:px-44">
+    <div class="flex flex-col">
+        <h1 class="text-4xl font-semibold">Lesoverzicht</h1>
+        <p class="mt-3 text-neutral-500">Bekijk de beschikbare lessen.</p>
+        <div class="flex flex-row justify-between items-center py-5 border-b-2">
+            <div class="flex flex-row items-center gap-3">
+                <img class="h-44" src="https://en.pimg.jp/043/397/262/1/43397262.jpg" alt="sexy booty">
+                <div class="">
+                    <p class="text-2xl">Les 1</p>
+                    <p class="text-lg font-thin">Datum: <span>11/5/2023</span></p>
+                    <p class="font-semibold">Korte bescrijving</p>
+                </div>
+            </div>
+            <a class="bg-gray-600 text-white py-2 px-5" href="#">Bekijk les</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

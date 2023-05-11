@@ -1,0 +1,23 @@
+form > div > div > input {
+    position: relative;
+    width: 100%;
+    min-width: 20rem;
+    box-sizing: border-box;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    padding-inline: 0.8rem;
+    background: rgba(226, 226, 226, 0.589);
+    outline: none;
+    color:#111;
+    box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+}
+
+form > div > div > label {
+    position: absolute;
+    z-index: 10;
+    user-select: none;
+    font-size: 12px;
+    font-weight: bold;
+    padding-inline: 0.8rem;
+    margin-top: 5px;
+}

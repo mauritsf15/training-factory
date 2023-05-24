@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ClassesRepository;
 
 class IndexController extends AbstractController
 {
@@ -25,10 +26,13 @@ class IndexController extends AbstractController
     }
 
     #[Route('/trainings', name: 'app_trainings')]
-    public function trainings(): Response
+    public function trainings(ClassesRepository $classesRepository): Response
     {
+        $classes = $classesRepository->findAll();
+        
         return $this->render('index/trainings.html.twig', [
             'page' => 'training',
+            'classes' => $classes,
         ]);
     }
 }

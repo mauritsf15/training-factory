@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Registreren{% endblock %}
 
 {% block body %}
 <div class="container mx-auto h-100 flex-1 flex items-center justify-center py-5 gap-10">
@@ -18,7 +18,7 @@
         <button type="submit" class="btn bg-gray-600 text-white w-full py-2 mt-10" style="
         box-shadow: 0px 3px 3px rgba(0,0,0,0.2);">Register</button>
         {{ form_end(registrationForm) }}
-        <p class="mt-4">Al een account? <a href="#" class="underline text-blue-500">Inloggen</a></p>
+        <p class="mt-4">Al een account? <a href="{{ path('app_login') }}" class="underline text-blue-500">Inloggen</a></p>
     </div>
 </div>
 {% endblock %}

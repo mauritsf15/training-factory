@@ -40,8 +40,21 @@
                     </a>
                 </div>
                 <div class="register z-50 flex items-center text-md">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-full mr-3" alt="profile" width="32" height="32">
-                    <a href="#"> Inloggen </a> <span class="mx-2">/</span> <a href="#">Registreren</a>
+                    <span class="mr-2">{{ app.user.username }}</span>
+                    {% endif %}
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="/login" class="nav-link mr-2">Login</a>
+                    <span> / </span>
+                    {%endif%}
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="/register" class="nav-link ml-2">Register</a>
+                    {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="/logout" class="nav-link">Logout</a>
+                    {% endif %}
+                    <!-- <a href="#"> Inloggen </a> <span class="mx-2">/</span> <a href="#">Registreren</a> -->
                 </div>
             </nav>
         </header>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -23,18 +23,15 @@
                     <h3 class="text-3xl font-bold">Training Factory Den Haag</h3>
                 </div>
                 <div class="links flex justify-center gap-2 absolute left-0 right-0 z-20">
-                    <a href="#" class="flex items-center px-1" style="
-                        border-bottom:2px solid black;">
+                    <a href="{{ path('app_index') }}" class="flex items-center px-1" style="{% if page == 'home' %}border-bottom:2px solid black;{% else %}border-bottom:2px solid transparent;{% endif %}">
                         <i class="fas text-md mr-2 fa-home"></i>
                         <span class="text-md">Home</span>
                     </a>
-                    <a href="#" class="flex items-center px-1" style="
-                    border-bottom:2px solid transparent;">
+                    <a href="{{ path('app_contact') }}" class="flex items-center px-1" style="{% if page == 'contact' %}border-bottom:2px solid black;{% else %}border-bottom:2px solid transparent;{% endif %}">
                         <i class="fas text-md mr-2 fa-info"></i>
                         <span class="text-md">Contact</span>
                     </a>
-                    <a href="#" class="flex items-center px-1" style="
-                    border-bottom:2px solid transparent;">
+                    <a href="{{ path('app_training') }}" class="flex items-center px-1" style="{% if page == 'training' %}border-bottom:2px solid black;{% else %}border-bottom:2px solid transparent;{% endif %}">
                         <i class="fas text-md mr-2 fa-dumbbell"></i>
                         <span class="text-md">Trainingsvormen</span>
                     </a>

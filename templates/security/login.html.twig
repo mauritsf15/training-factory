@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    <div class="container mx-auto h-100 flex-1 flex items-center justify-center py-5 gap-10">
+        <div class="border-2 p-8 pt-10 pb-20 flex items-center flex-col">
+            <h1 class="text-4xl font-semibold mb-7">Inloggen</h1>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <div class="flex flex-col gap-5">
+                    <label class="customLabel">Username</label>
+                    <input type="text" value="{{ last_username }}" name="username" class="form-control" autocomplete="username" required autofocus>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <label class="customLabel">Password</label>
+                    <input type="password" name="password" class="form-control" autocomplete="current-password" required>
+                </div>
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+
+                <button type="submit" class="btn bg-gray-600 text-white w-full py-2 mt-10" style="
+                box-shadow: 0px 3px 3px rgba(0,0,0,0.2);">Login</button>
+                <p class="mt-4">Geen account? <a href="#" class="underline text-blue-500">Registreer</a></p>
+    </div>
+</form>
+{% endblock %}

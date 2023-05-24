@@ -26,10 +26,10 @@ class Classes
     private ?string $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'classes')]
-    private ?Trainings $training_id = null;
+    private ?Trainings $training = null;
 
     #[ORM\ManyToOne(inversedBy: 'classes')]
-    private ?User $instructor_id = null;
+    private ?User $instructor = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'classes')]
     private Collection $enrollments;
@@ -85,21 +85,21 @@ class Classes
         return $this->training_id;
     }
 
-    public function setTrainingId(?Trainings $training_id): self
+    public function setTrainingId(?Trainings $training): self
     {
-        $this->training_id = $training_id;
+        $this->training_id = $training;
 
         return $this;
     }
 
     public function getInstructorId(): ?User
     {
-        return $this->instructor_id;
+        return $this->instructor;
     }
 
-    public function setInstructorId(?User $instructor_id): self
+    public function setInstructorId(?User $instructor): self
     {
-        $this->instructor_id = $instructor_id;
+        $this->instructor = $instructor;
 
         return $this;
     }

@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8377f258-4881-4fe6-b39f-8d56ae322ca0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20230524075151.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index/contact.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index/trainings.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/training-factory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/training-factory.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20230511124321.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrainingController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,6 +196,7 @@
       <workItem from="1684914047113" duration="505000" />
       <workItem from="1684914558490" duration="1385000" />
       <workItem from="1684915976707" duration="7000" />
+      <workItem from="1685525726216" duration="791000" />
     </task>
     <servers />
   </component>

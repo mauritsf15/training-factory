@@ -19,4 +19,15 @@ class TrainingController extends AbstractController
             'classes' => $classes,
         ]);
     }
+
+    #[Route('/addtraining', name: 'app_addtraining')]
+    public function addtraining(ClassesRepository $classesRepository): Response
+    {
+        $classes = $classesRepository->findAll();
+
+        return $this->render('training/addtraining.html.twig', [
+            'page' => 'addtraining',
+            'classes' => $classes,
+        ]);
+    }
 }

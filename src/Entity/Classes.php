@@ -26,13 +26,13 @@ class Classes
     private ?string $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'classes')]
-    private ?Trainings $training = null;
+    public ?Trainings $training = null;
 
     #[ORM\ManyToOne(inversedBy: 'classes')]
-    private ?User $instructor = null;
+    public ?User $instructor = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'classes')]
-    private Collection $enrollments;
+    public Collection $enrollments;
 
     public function __construct()
     {

@@ -21,7 +21,7 @@ class TrainingsRepository extends ServiceEntityRepository
         parent::__construct($registry, Trainings::class);
     }
 
-    public function save(Trainings $entity, bool $flush = false): void
+    public function save(Trainings $entity, bool $flush = true): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TrainingsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Trainings $entity, bool $flush = false): void
+    public function remove(Trainings $entity, bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
 

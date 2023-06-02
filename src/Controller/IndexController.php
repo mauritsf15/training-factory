@@ -25,17 +25,6 @@ class IndexController extends AbstractController
         ]);
     }
 
-    #[Route('/trainings', name: 'app_trainings')]
-    public function trainings(ClassesRepository $classesRepository): Response
-    {
-        $classes = $classesRepository->findAll();
-
-        return $this->render('index/trainings.html.twig', [
-            'page' => 'training',
-            'classes' => $classes,
-        ]);
-    }
-
     #[Route('/404', name: 'app_denied')]
     public function denied(): Response
     {

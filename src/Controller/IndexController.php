@@ -29,10 +29,26 @@ class IndexController extends AbstractController
     public function trainings(ClassesRepository $classesRepository): Response
     {
         $classes = $classesRepository->findAll();
-        
+
         return $this->render('index/trainings.html.twig', [
             'page' => 'training',
             'classes' => $classes,
+        ]);
+    }
+
+    #[Route('/404', name: 'app_denied')]
+    public function denied(): Response
+    {
+        return $this->render('index/404.html.twig', [
+            'page' => '404',
+        ]);
+    }
+
+    #[Route('/profile', name: 'app_profile')]
+    public function profile(): Response
+    {
+        return $this->render('index/profile.html.twig', [
+            'page' => 'profile',
         ]);
     }
 }

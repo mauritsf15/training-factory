@@ -114,10 +114,10 @@ class Classes
 
     public function addEnrollment(User $enrollment): self
     {
+        
         if (!$this->enrollments->contains($enrollment)) {
             $this->enrollments->add($enrollment);
         }
-
         return $this;
     }
 

@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ClassesRepository;
 use App\Entity\Classes;
 use App\Entity\User;
+use App\Entity\Enrollments;
+use App\Repository\EnrollmentsRepository;
 
 class TrainingController extends AbstractController
 {
@@ -46,14 +48,21 @@ class TrainingController extends AbstractController
     }
 
     #[Route('/enroll/{id}/{userid}', name: 'app_enroll')]
-    public function enroll(ClassesRepository $classesRepository, Classes $classes, UserRepository $userRepository, $id, $userid): Response
+    public function enroll(ClassesRepository $classesRepository, UserRepository $userRepository, EnrollmentsRepository $enrollmentsRepository,$id, $userid): Response
     {
         $user = $userRepository->findOneBy(['id' => $userid]);
         $class = $classesRepository->findOneBy((['id' => $id]));
-        $class->addEnrollment($user);
 
-        $classesRepository->save($class);
+        $checkIfEnrolled = $enrollmentsRepository->findOneBy(['user' => $user, 'class_id' => $class]);
 
-        return $this->redirectToRoute('app_index');
+        dd($checkIfEnrolled);
+
+        // $enrollment = new Enrollments;
+        // $enrollment->setClass($class);
+        // $enrollment->setUser($user);
+
+        // $enrollmentsRepository->save($enrollment);
+
+        // return $this->redirectToRoute('app_index');
     }
 }

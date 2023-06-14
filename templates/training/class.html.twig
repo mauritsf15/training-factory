@@ -5,12 +5,12 @@
 {% block body %}
 <div class="container mx-auto h-100 flex-1 py-5 px-0 md:px-44">
     <div class="flex flex-col">
-        <h1 class="text-4xl font-semibold">{{ class.name }}</h1>
-        <p class="mt-3 text-neutral-500">{{ class.training.name }}</p>
-        <p>{{ class.description }}</p>
+        <h1 class="text-4xl font-semibold">{{ class.trainings.name }}</h1>
+        <p class="mt-3 text-neutral-500">{{ class.trainings.name }}</p>
+        <img class="h-44" src="{{ asset('/img/'~class.trainings.image) }}" alt="{{ class.trainings.name }}">
         <br>
         <p>
-            Datum: {{ class.date }}<br>Schrijf je nu in!<br><br>
+            Datum: {{ class.date }}<br>Lengte: {{ class.duration }} min.<br>Extra kosten: &euro;{{ class.trainings.extracosts }}<br>Schrijf je nu in!<br><br>
             <a class="bg-green-600 text-white py-2 px-5" href="{{ path('app_enroll', {'id': class.id, 'userid': app.user.id}) }}">Inschrijven</a>
         </p>
     </div>

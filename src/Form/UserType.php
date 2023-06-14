@@ -15,6 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 use App\Form\RoleType;
 
+// entity type
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -128,17 +131,15 @@ class UserType extends AbstractType
                     ],
                 ]
             )
-            ->add('roles', CollectionType::class, [
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
+            ->add('roles', EntityType::class, [
+                'class' => Role::class,
+                'multiple' => true,
+                'expanded' => false,
                 'label' => 'Roles',
-                    'attr' => [
-                        'placeholder' => 'Roles',
-                        'class' => 'bg-neutral-100 flex my-2 p-2 border-2 border-neutral-200 rounded-sm shadow-lg',
-                    ],
+                'attr' => [
+                    'class' => 'bg-neutral-100 flex my-2 p-2 border-2 border-neutral-200 rounded-sm shadow-lg',
+                ],
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

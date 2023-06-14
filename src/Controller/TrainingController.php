@@ -11,6 +11,8 @@ use App\Entity\Classes;
 use App\Entity\User;
 use App\Entity\Enrollments;
 use App\Repository\EnrollmentsRepository;
+use App\Form\AddClassType;
+use Symfony\Component\HttpFoundation\Request;
 
 class TrainingController extends AbstractController
 {
@@ -26,14 +28,27 @@ class TrainingController extends AbstractController
     }
 
     #[Route('/addtraining', name: 'app_addtraining')]
-    public function addtraining(ClassesRepository $classesRepository): Response
+    public function addtraining(ClassesRepository $classesRepository, Request $request): Response
     {
         $classes = $classesRepository->findAll();
+        
+        $class = new Classes();
 
-        return $this->render('training/addtraining.html.twig', [
-            'page' => 'addtraining',
-            'classes' => $classes,
-        ]);
+        $form = $this->createForm(AddClassType::class, $class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $class = $form->getData();
+            $classesRepository->save($class);
+            $this->addFlash('succes', 'Nieuwe training is aangemaakt!');
+            return $this->redirectToRoute('app_training');
+        } else {
+            return $this->renderForm('training/addtraining.html.twig', [
+                'page' => 'addtraining',
+                'classes' => $classes,
+                'form' => $form,
+            ]);
+        }
     }
 
     #[Route('/class/{id}', name: 'app_class')]
@@ -53,16 +68,23 @@ class TrainingController extends AbstractController
         $user = $userRepository->findOneBy(['id' => $userid]);
         $class = $classesRepository->findOneBy((['id' => $id]));
 
-        $checkIfEnrolled = $enrollmentsRepository->findOneBy(['user' => $user, 'class_id' => $class]);
+        $checkIfEnrolled = $enrollmentsRepository->findBy(['User' => $user, 'Class' => $class]);
 
-        dd($checkIfEnrolled);
+        if (count($checkIfEnrolled) == 0) {
 
-        // $enrollment = new Enrollments;
-        // $enrollment->setClass($class);
-        // $enrollment->setUser($user);
+            $enrollment = new Enrollments();
+            $enrollment->setClass($class);
+            $enrollment->setUser($user);
 
-        // $enrollmentsRepository->save($enrollment);
+            $enrollmentsRepository->save($enrollment);
 
-        // return $this->redirectToRoute('app_index');
+            $this->addFlash('succes', 'Je staat nu ingeschreven voor deze training!');
+
+            return $this->redirectToRoute('app_index');
+
+        } else {
+            $this->addFlash('danger', 'Je bent al ingeschreven voor deze training!');
+            return $this->redirectToRoute('app_training');
+        }
     }
 }

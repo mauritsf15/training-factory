@@ -34,6 +34,8 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
+            $this->addFlash('succes', 'Je bent geregistreerd!');
+
             return $this->redirectToRoute('app_index');
         }
 

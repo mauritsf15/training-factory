@@ -35,6 +35,10 @@
                         <i class="fas text-md mr-2 fa-dumbbell"></i>
                         <span class="text-md" style="{% if page == 'training' %}border-bottom:2px solid black;{% else %}border-bottom:2px solid transparent;{% endif %}">Trainingsvormen</span>
                     </a>
+                    <a href="{{ path('app_training') }}" class="flex items-center px-1">
+                        <i class="fas text-md mr-2 fa-book"></i>
+                        <span class="text-md" style="{% if page == 'rules' %}border-bottom:2px solid black;{% else %}border-bottom:2px solid transparent;{% endif %}">Rules</span>
+                    </a>                    
                 </div>
                 <div class="register z-50 flex items-center text-md">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}

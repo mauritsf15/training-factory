@@ -19,13 +19,13 @@ class Trainings
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'training_id', targetEntity: Classes::class)]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $extra_costs = null;
+
+    #[ORM\OneToMany(mappedBy: 'Trainings', targetEntity: Classes::class)]
     private Collection $classes;
 
     public function __construct()
@@ -50,18 +50,6 @@ class Trainings
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -70,6 +58,18 @@ class Trainings
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getExtraCosts(): ?string
+    {
+        return $this->extra_costs;
+    }
+
+    public function setExtraCosts(?string $extra_costs): self
+    {
+        $this->extra_costs = $extra_costs;
 
         return $this;
     }
@@ -86,7 +86,7 @@ class Trainings
     {
         if (!$this->classes->contains($class)) {
             $this->classes->add($class);
-            $class->setTrainingId($this);
+            $class->setTrainings($this);
         }
 
         return $this;
@@ -96,8 +96,8 @@ class Trainings
     {
         if ($this->classes->removeElement($class)) {
             // set the owning side to null (unless already changed)
-            if ($class->getTrainingId() === $this) {
-                $class->setTrainingId(null);
+            if ($class->getTrainings() === $this) {
+                $class->setTrainings(null);
             }
         }
 

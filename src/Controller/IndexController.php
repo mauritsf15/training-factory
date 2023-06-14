@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,10 +35,21 @@ class IndexController extends AbstractController
     }
 
     #[Route('/profile', name: 'app_profile')]
-    public function profile(): Response
+    public function profile(UserRepository $userRepository): Response
     {
+
+        $userid = $this->getUser()->getId();
+
+        $user = $userRepository->findOneBy(['id' => $userid]);
+
         return $this->render('index/profile.html.twig', [
             'page' => 'profile',
+            'user' => $user,
         ]);
+    }
+
+    #[Route('/editprofile', name: 'app_editprofile')]
+    public function editprofile(UserRepository $userRepository): Response
+    {
     }
 }

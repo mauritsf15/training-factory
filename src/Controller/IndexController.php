@@ -26,6 +26,14 @@ class IndexController extends AbstractController
         ]);
     }
 
+    #[Route('/rules', name: 'app_rules')]
+    public function rules(): Response
+    {
+        return $this->render('index/rules.html.twig', [
+            'page' => 'rules',
+        ]);
+    }
+
     #[Route('/404', name: 'app_denied')]
     public function denied(): Response
     {
@@ -51,5 +59,6 @@ class IndexController extends AbstractController
     #[Route('/editprofile', name: 'app_editprofile')]
     public function editprofile(UserRepository $userRepository): Response
     {
+        
     }
 }

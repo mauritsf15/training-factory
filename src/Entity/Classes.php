@@ -16,23 +16,20 @@ class Classes
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    #[ORM\ManyToOne(inversedBy: 'classes')]
+    private ?Trainings $Trainings = null;
 
     #[ORM\Column(length: 255)]
     private ?string $date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'classes')]
-    public ?Trainings $training = null;
+    #[ORM\Column]
+    private ?int $duration = null;
 
-    #[ORM\ManyToOne(inversedBy: 'classes')]
-    public ?User $instructor = null;
+    #[ORM\Column]
+    private ?int $max_users = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'classes')]
-    public Collection $enrollments;
+    #[ORM\OneToMany(mappedBy: 'Class', targetEntity: Enrollments::class)]
+    private Collection $enrollments;
 
     public function __construct()
     {
@@ -44,26 +41,14 @@ class Classes
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTrainings(): ?Trainings
     {
-        return $this->name;
+        return $this->Trainings;
     }
 
-    public function setName(string $name): self
+    public function setTrainings(?Trainings $Trainings): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
+        $this->Trainings = $Trainings;
 
         return $this;
     }
@@ -80,50 +65,56 @@ class Classes
         return $this;
     }
 
-    public function getTrainingId(): ?Trainings
+    public function getDuration(): ?int
     {
-        return $this->training_id;
+        return $this->duration;
     }
 
-    public function setTrainingId(?Trainings $training): self
+    public function setDuration(int $duration): self
     {
-        $this->training_id = $training;
+        $this->duration = $duration;
 
         return $this;
     }
 
-    public function getInstructorId(): ?User
+    public function getMaxUsers(): ?int
     {
-        return $this->instructor;
+        return $this->max_users;
     }
 
-    public function setInstructorId(?User $instructor): self
+    public function setMaxUsers(int $max_users): self
     {
-        $this->instructor = $instructor;
+        $this->max_users = $max_users;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, User>
+     * @return Collection<int, Enrollments>
      */
     public function getEnrollments(): Collection
     {
         return $this->enrollments;
     }
 
-    public function addEnrollment(User $enrollment): self
+    public function addEnrollment(Enrollments $enrollment): self
     {
-        
         if (!$this->enrollments->contains($enrollment)) {
             $this->enrollments->add($enrollment);
+            $enrollment->setClass($this);
         }
+
         return $this;
     }
 
-    public function removeEnrollment(User $enrollment): self
+    public function removeEnrollment(Enrollments $enrollment): self
     {
-        $this->enrollments->removeElement($enrollment);
+        if ($this->enrollments->removeElement($enrollment)) {
+            // set the owning side to null (unless already changed)
+            if ($enrollment->getClass() === $this) {
+                $enrollment->setClass(null);
+            }
+        }
 
         return $this;
     }

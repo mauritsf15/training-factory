@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verander gegevens{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto h-100 flex-1 py-5 px-0 md:px-44">
+        <div>
+            <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+
+                <div class="mt-16">
+                    <h1 class="font-bold text-center text-3xl text-gray-900">{{ user.firstname }} {{ user.lastname }}</h1>
+                    <p class="text-center text-sm text-gray-400 font-medium">@{{ user.username }}</p>
+                    <p>
+                        <span>
+
+                        </span>
+                    </p>
+                    <div class="w-full">
+                        <h3 class="font-medium text-gray-900 text-left px-6">Verander Gegevens</h3>
+                        {{ form_start(form) }}
+                        <div class="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
+                            <a class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" class="rounded-full h-6 shadow-md inline-block mr-2">
+                                {{ form_row(form.username) }}
+                            </a>
+
+                            <a class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" class="rounded-full h-6 shadow-md inline-block mr-2">
+                                {{ form_row(form.firstname) }}
+                            </a>
+
+                            <a class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" class="rounded-full h-6 shadow-md inline-block mr-2">
+                                {{ form_row(form.lastname) }}
+                            </a>
+
+                            <a class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
+                                <img src="https://img.freepik.com/free-icon/placeholder_318-903608.jpg" alt="" class="rounded-full h-6 shadow-md inline-block mr-2">
+                                {{ form_row(form.street) }}
+                            </a>
+
+                            <a class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
+                                <img src="https://static.thenounproject.com/png/4595392-200.png" alt="" class="rounded-full h-6 shadow-md inline-block mr-2">
+                                {{ form_row(form.birthdate) }}
+                            </a>
+                            <button type="submit" class="btn bg-green-600 text-white w-1/2 text-center py-2 mt-10" style="
+                            box-shadow: 0px 3px 3px rgba(0,0,0,0.2);">Opslaan</button>
+
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

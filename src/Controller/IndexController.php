@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Form\EditProfileType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ClassesRepository;
+use App\Form\UserType;
 
 class IndexController extends AbstractController
 {
@@ -57,8 +60,26 @@ class IndexController extends AbstractController
     }
 
     #[Route('/editprofile', name: 'app_editprofile')]
-    public function editprofile(UserRepository $userRepository): Response
+    public function editprofile(UserRepository $userRepository, Request $request): Response
     {
-        
+        $userid = $this->getUser()->getId();
+
+        $user = $userRepository->findOneBy(['id' => $userid]);
+
+        $form = $this->createForm(EditProfileType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $userRepository->save($user);
+            $this->addFlash('success', 'Gegevens opgeslagen');
+            return $this->redirectToRoute('app_profile');
+        } else {
+            return $this->renderForm('index/editprofile.html.twig', [
+                'page' => 'editprofile',
+                'user' => $user,
+                'form' => $form,
+            ]);
+        }
     }
 }

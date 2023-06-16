@@ -44,7 +44,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-full mr-3" alt="profile" width="32" height="32">
                         <a href="{{ path('app_profile') }}">
-                            <span class="mr-2">{{ app.user.username }}</span>
+                            <span class="mr-2">{{ app.user.firstname }}</span>
                         </a>
                     {% endif %}
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}

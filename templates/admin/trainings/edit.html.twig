@@ -6,29 +6,19 @@
   <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="px-4 py-6 sm:px-0">
     <div class="flex items-center justify-between mb-3">
-      <h2 class="text-2xl font-bold">Edit User</h2>
+      <h2 class="text-2xl font-bold">Edit Training</h2>
       <a href="{{ path('app_admin') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold px-2 py-2 rounded-sm shadow-md">
       <i class="fas fa-arrow-left mr-1"></i>
             Cancel
           </a>
     </div>
-      <form action="{{ path('app_admin_user_edit', {'id': user.id}) }}" method="post">
+      <form action="{{ path('app_admin_trainings_edit', {'id': training.id}) }}" method="post">
         {{ form_start(form) }}
         <div class="grid grid-cols-2 gap-4">
           <div class="flex flex-col">
-            {{ form_row(form.username) }}
-            {{ form_row(form.firstname) }}
-            {{ form_row(form.lastname) }}
-            {{ form_row(form.street) }}
-            {{ form_row(form.subscriptionamount) }}
-            <div class="hidden">{{ form_row(form.password )}}</div>
-            <div class="hidden">{{ form_row(form.roles )}}</div>
-          </div>
-          <div class="flex flex-col">
-            {{ form_row(form.birthdate) }}
-            {{ form_row(form.hiringdate) }}
-            {{ form_row(form.salary) }}
-            {{ form_row(form.socialsecnumber) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.image) }}
+            {{ form_row(form.extra_costs) }}
           </div>
         </div>
         <div class="mt-6">

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-2xl font-bold">New User</h2>
+      <a href="{{ path('app_admin') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold px-2 py-2 rounded-sm shadow-md">
+      <i class="fas fa-arrow-left mr-1"></i>
+            Cancel
+          </a>
+    </div>
+      <form action="{{ path('app_admin_user_new') }}" method="post">
+        {{ form_start(form) }}
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            {{ form_row(form.username) }}
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.street) }}
+            {{ form_row(form.password) }}
+          </div>
+          <div>
+            {{ form_row(form.birthdate) }}
+            {{ form_row(form.hiringdate) }}
+            {{ form_row(form.salary) }}
+            {{ form_row(form.socialsecnumber) }}
+            {{ form_row(form.subscriptionamount) }}
+          </div>
+        </div>
+        <div class="mt-6">
+          <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">
+            Create
+          </button>
+        </div>
+        {{ form_end(form) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

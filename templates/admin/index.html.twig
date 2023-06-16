@@ -15,6 +15,7 @@
 <table>
   <thead>
     <tr>
+      <th>#</th>
       <th>Type</th>
       <th>Username</th>
       <th>First Name</th>
@@ -31,6 +32,7 @@
   <tbody>
 {% for user in users %}
   <tr>
+    <td>{{ user.id|e }}</td>
     <td>{{ user.roles|e|join(', ') }}</td>
     <td>{{ user.username|e }}</td>
     <td>{{ user.firstname|e }}</td>
@@ -44,6 +46,43 @@
     <td>
       <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="bg-blue-500 px-2 py-1 text-white rounded-sm shadow-md">Edit</a>
       <a href="{{ path('app_admin_user_delete', {'id': user.id}) }}" class="bg-red-500 px-2 py-1 text-white rounded-sm shadow-md">Delete</a>
+    </td>
+  </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+<div class="flex items-center justify-between mt-10">
+    <h1 class="text-3xl p-5 px-0">Trainingsvormen</h1>
+    <a href="{{ path('app_admin_trainings_new') }}" class="bg-green-500 px-10 py-1.5 text-white rounded-sm shadow-md">
+    <i class="fas fa-plus"></i>
+    New
+    </a>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Naam</th>
+      <th>Image</th>
+      <th>Extra Costs</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for training in trainings %}
+  <tr>
+
+    <td>{{ training.id|e }}</td>
+    <td>{{ training.name|e }}</td>
+    <td>{{ training.image|e }}</td>
+    <td>{{ training.extracosts|e }}</td>
+
+    <td>
+      <a href="{{ path('app_admin_trainings_edit', {'id': training.id}) }}" class="bg-blue-500 px-2 py-1 text-white rounded-sm shadow-md">Edit</a>
+      <a href="{{ path('app_admin_trainings_delete', {'id': training.id}) }}" class="bg-red-500 px-2 py-1 text-white rounded-sm shadow-md">Delete</a>
     </td>
   </tr>
 {% endfor %}

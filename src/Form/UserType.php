@@ -124,15 +124,15 @@ class UserType extends AbstractType
             ->add('password',
                 null,
                 [
-                    'label' => 'Password',
+                    'label' => 'Wachtwoord',
                     'attr' => [
-                        'placeholder' => 'Password',
+                        'placeholder' => 'Wachtwoord',
                         'class' => 'bg-neutral-100 flex my-2 p-2 border-2 border-neutral-200 rounded-sm shadow-lg',
                     ],
                 ]
             )
             ->add('roles', EntityType::class, [
-                'class' => Role::class,
+                'class' => User::class,
                 'multiple' => true,
                 'expanded' => false,
                 'label' => 'Roles',

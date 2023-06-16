@@ -19,7 +19,7 @@ class AddClassType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => false,
-                'label' => 'Training Type'
+                'label' => '‎',
             ])
             ->add('date')
             ->add('duration')

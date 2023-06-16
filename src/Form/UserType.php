@@ -130,16 +130,7 @@ class UserType extends AbstractType
                         'class' => 'bg-neutral-100 flex my-2 p-2 border-2 border-neutral-200 rounded-sm shadow-lg',
                     ],
                 ]
-            )
-            ->add('roles', EntityType::class, [
-                'class' => User::class,
-                'multiple' => true,
-                'expanded' => false,
-                'label' => 'Roles',
-                'attr' => [
-                    'class' => 'bg-neutral-100 flex my-2 p-2 border-2 border-neutral-200 rounded-sm shadow-lg',
-                ],
-            ]);
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

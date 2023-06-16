@@ -10,25 +10,33 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UserRepository;
 use App\Entity\User;
 
+use App\Repository\TrainingsRepository;
+use App\Entity\Trainings;
+
 use Symfony\Component\HttpFoundation\Request;
 
 // import user form
 
 use App\Form\UserType;
+use App\Form\TrainingType;
+
 
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="app_admin")
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, TrainingsRepository $trainingsRepository): Response
     {
         // get all users
         $users = $userRepository->findAll();
 
+        $trainings = $trainingsRepository->findAll();
+
         return $this->render('admin/index.html.twig', [
             'page' => 'admin',
-            'users' => $users
+            'users' => $users,
+            'trainings' => $trainings,
         ]);
     }
 
@@ -56,7 +64,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin');
         }
 
-        return $this->renderForm('admin/edit.html.twig', [
+        return $this->renderForm('admin/user/edit.html.twig', [
             'page' => 'admin',
             'form' => $form,
             'user' => $user,
@@ -80,7 +88,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin');
         }
 
-        return $this->render('admin/new.html.twig', [
+        return $this->render('admin/user/new.html.twig', [
             'page' => 'admin',
             'form' => $form->createView(),
         ]);
@@ -98,4 +106,62 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_admin');
     }
+
+
+        /**
+     * @Route("/admin/trainings/new", name="app_admin_trainings_new")
+     */
+    public function trainingsNew(Request $request, TrainingsRepository $trainingsRepository): Response
+    {
+        $training = new Trainings();
+        $form = $this->createForm(TrainingType::class, $training);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $training = $form->getData();
+
+            $trainingsRepository->save($training);
+
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('admin/trainings/new.html.twig', [
+            'page' => 'admin',
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/trainings/{id}/edit", name="app_admin_trainings_edit")
+     */
+    public function trainingsEdit(Trainings $training, Request $request, TrainingsRepository $trainingsRepository): Response
+    {
+        $form = $this->createForm(TrainingType::class, $training);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $training = $form->getData();
+
+            $trainingsRepository->save($training);
+
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->renderForm('admin/trainings/edit.html.twig', [
+            'page' => 'admin',
+            'form' => $form,
+            'training' => $training,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/trainings/{id}/delete", name="app_admin_trainings_delete")
+     */
+    public function trainingsDelete(Trainings $training, Request $request, TrainingsRepository $trainingsRepository): Response
+    {
+        $trainingsRepository->remove($training);
+
+        return $this->redirectToRoute('app_admin');
+    }
+    
 }

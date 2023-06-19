@@ -21,6 +21,7 @@ class TrainingController extends AbstractController
     {
         $classes = $classesRepository->findAll();
 
+
         return $this->render('training/training.html.twig', [
             'page' => 'training',
             'classes' => $classes,
@@ -52,13 +53,20 @@ class TrainingController extends AbstractController
     }
 
     #[Route('/class/{id}', name: 'app_class')]
-    public function class(ClassesRepository $classesRepository, $id): Response
+    public function class(ClassesRepository $classesRepository, EnrollmentsRepository $enrollmentsRepository, $id): Response
     {
         $class = $classesRepository->findOneBy(['id' => $id]);
+        $checkIfEnrolled = $enrollmentsRepository->findBy(['User' => $this->getUser()->getId(), 'Class' => $class]);
+        $enrolled = false;
+
+        if(count($checkIfEnrolled) != 0) {
+            $enrolled = true;
+        }
 
         return $this->render('training/class.html.twig', [
             'page' => 'class',
             'class' => $class,
+            'enrolled' => $enrolled
         ]);
     }
 
@@ -83,8 +91,13 @@ class TrainingController extends AbstractController
             return $this->redirectToRoute('app_index');
 
         } else {
-            $this->addFlash('danger', 'Je bent al ingeschreven voor deze training!');
+            $this->addFlash('succes', 'Je bent nu uitgeschreven voor deze training!');
+
+            $enrollmentsRepository->remove($checkIfEnrolled[0]);
+
             return $this->redirectToRoute('app_training');
         }
     }
+
+
 }

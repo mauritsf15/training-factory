@@ -11,7 +11,11 @@
         <br>
         <p>
             Datum: {{ class.date }}<br>Lengte: {{ class.duration }} min.<br>Extra kosten: &euro;{{ class.trainings.extracosts }}<br>Schrijf je nu in!<br><br>
-            <a class="bg-green-600 text-white py-2 px-5" href="{{ path('app_enroll', {'id': class.id, 'userid': app.user.id}) }}">Inschrijven</a>
+            {% if(enrolled) %}
+                <a class="bg-green-600 text-white py-2 px-5" href="{{ path('app_enroll', {'id': class.id, 'userid': app.user.id}) }}">Uitschrijven</a>
+            {% else %}
+                <a class="bg-green-600 text-white py-2 px-5" href="{{ path('app_enroll', {'id': class.id, 'userid': app.user.id}) }}">Inschrijven</a>
+            {% endif %}
         </p>
     </div>
 </div>

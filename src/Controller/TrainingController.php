@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\EditClassType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,7 +82,28 @@ class TrainingController extends AbstractController
         ]);
     }
 
-    #[Route('/enroll/{id}/{userid}', name: 'app_enroll')]
+    #[Route('/class/edit/{id}', name: 'app_edit_class')]
+    public function editclass(ClassesRepository $classesRepository, Request $request, $id): Response
+    {
+        $class = $classesRepository->find($id);
+        $form = $this->createForm(EditClassType::class, $class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $class = $form->getData();
+            $classesRepository->save($class);
+            $this->addFlash('succes', 'Class is bewerkt!');
+            return $this->redirectToRoute('app_training');
+        } else {
+            return $this->renderForm('training/editclass.html.twig', [
+                'page' => 'editclass',
+                'class' => $class,
+                'form' => $form,
+            ]);
+        }
+    }
+
+    #[Route('/class/enroll/{id}/{userid}', name: 'app_enroll')]
     public function enroll(ClassesRepository $classesRepository, UserRepository $userRepository, EnrollmentsRepository $enrollmentsRepository,$id, $userid): Response
     {
         $user = $userRepository->findOneBy(['id' => $userid]);
@@ -109,6 +131,7 @@ class TrainingController extends AbstractController
             return $this->redirectToRoute('app_training');
         }
     }
+
 
 
 }

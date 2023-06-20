@@ -11,12 +11,48 @@
         <br>
         <p>
             Datum: {{ class.date }}<br>Lengte: {{ class.duration }} min.<br>Extra kosten: &euro;{{ class.trainings.extracosts }}<br>Schrijf je nu in!<br><br>
-            {% if(enrolled) %}
+        </p>
+            {% if is_granted("ROLE_TRAINER") %}
+                <a class="bg-green-600 text-white py-2 px-5 text-center max-w-[30rem] w-full mx-auto" href="{{ path('app_edit_class', {'id': class.id}) }}">Bijwerken</a>
+                <div class="collapse bg-base-200">
+                    <input type="checkbox" />
+                    <div class="collapse-title text-xl font-medium">
+                        Click me to view all enrollments
+                    </div>
+                    <div class="collapse-content">
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra">
+                                <!-- head -->
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>D.O.B</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- rows -->
+                                {% for enrollment in enrollments %}
+                                    <tr>
+                                        <th>{{ loop.index }}</th>
+                                        <td>{{ enrollment.username }}</td>
+                                        <td>{{ enrollment.firstname }} {{ enrollment.lastname }}</td>
+                                        <td>{{ enrollment.birthdate }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            {% elseif(enrolled) %}
                 <a class="bg-green-600 text-white py-2 px-5" href="{{ path('app_enroll', {'id': class.id, 'userid': app.user.id}) }}">Uitschrijven</a>
             {% else %}
                 <a class="bg-green-600 text-white py-2 px-5" href="{{ path('app_enroll', {'id': class.id, 'userid': app.user.id}) }}">Inschrijven</a>
             {% endif %}
-        </p>
+
     </div>
 </div>
 {% endblock %}

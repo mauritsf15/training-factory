@@ -88,7 +88,7 @@ class TrainingController extends AbstractController
 
             $this->addFlash('succes', 'Je staat nu ingeschreven voor deze training!');
 
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_training');
 
         } else {
             $this->addFlash('succes', 'Je bent nu uitgeschreven voor deze training!');
@@ -98,6 +98,4 @@ class TrainingController extends AbstractController
             return $this->redirectToRoute('app_training');
         }
     }
-
-
 }

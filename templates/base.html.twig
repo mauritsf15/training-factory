@@ -47,6 +47,11 @@
                             <span class="mr-2">{{ app.user.firstname }}</span>
                         </a>
                     {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}">
+                            <span class="mr-2">&middot; Admin &middot;</span>
+                        </a>
+                    {% endif %}
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="/login" class="nav-link mr-2">Login</a>
                     <span> / </span>
